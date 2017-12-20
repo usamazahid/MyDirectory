@@ -1,0 +1,474 @@
+<ion-view>
+   <ion-header-bar class="bar-stableb colorbg">
+   </ion-header-bar>
+   <ion-content ng-init="initMapBusi()">
+      <div class="full-bg">
+         <div class="bmd-search-bar-outer">
+            <button class="button button-positive button-clear button_text icon ion-ios-search txt-color-gray"></button>
+            <input type="text" class="bmd-input" placeholder="What service do you need today?" ng-change="search()" ng-model="data.search">
+           <!--  <button class="button button-positive button-clear button_text icon ion-ios-close txt-color-black"></button> -->
+         </div>
+      </div>
+       <div class="menu_simple" ng-show="showList">
+      <ul>
+         <li ng-repeat="businesses in business | filter:data.search" ng-click='data.search=businesses.name;hideList(businesses)'><a href="#">{{businesses.name}}</a></li>
+      
+      </ul>
+       <ul  ng-if="business.name!=data.search">
+         <li ><a href="#">No results</a></li>
+        
+      </ul>
+   </div>
+   
+       <div  id="mapbusi"  style="width:100%;height:200px;" class="map" ></div>
+      <div class="bmd-result-row border">
+         <div class="bmd-result1 wht" ng-show="from_type=='singleValueDb'">
+            <img ng-src="{{businessAlldetails.image}}">
+            <div class="bmd-result-details ttop">
+
+               <img ng-show="favid=='noFav'" src="img/add.png" ng-click="favourite(businessAlldetails.id,businessAlldetails.cid)">
+               <img ng-hide="favid=='noFav'" src="img/ypstrip.png" ng-click="favourite(businessAlldetails.id,businessAlldetails.cid)">
+               <p   class="md_name">{{businessAlldetails.business_name}}</p>
+            
+               <div>
+                <raty id="star" score="{{businessAlldetails.rating}}" number="5"></raty>
+               </div>
+               <p>{{businessAlldetails.street_address}}<br>
+                  {{businessAlldetails.phone_number}}<br>
+                 
+                  <img src="img/loccation.png" width="15px" height="15px"> <span class="md_loc">{{businessAlldetails.city}}</span>
+               </p>
+            </div>
+            <div class="bmd-result-dstnce top">
+               <!-- <div class="km">1.2 KM </div> -->
+            </div>
+         </div>
+
+          <div class="bmd-result1 wht" ng-show="from_type==='api_name' && fromtype==='singleValue'">
+			  
+			  
+            <img class="default_img" ng-src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=150&photoreference={{businessAllGogldetails[0].photos[0].photo_reference}}&key={{apikey}}">
+			  
+			  
+            <div class="bmd-result-details ttop">
+              
+           
+               <p class="md_name" >{{businessAllGogldetails[0].name}}</p>
+               <div> 
+                <raty id="star" score="{{businessAllGogldetails[0].rating}}" number="5"></raty>
+               </div>
+               <p>{{businessAllGogldetails[0].formatted_address}}<br>
+                  {{businessAllGogldetails[0].formatted_phone_number}}<br>
+                 
+                  <img src="img/loccation.png" width="15px" height="15px"> <span class="md_loc">{{businessAllGogldetails[0].address_components[0].long_name}}</span>
+               </p>
+            </div>
+            <div class="bmd-result-dstnce top">
+              <!--  <div class="km">1.2 KM </div> -->
+            </div>
+         </div>
+           <div class="bmd-result1 wht" ng-show="from_type=='google' && fromtype==='singleValue'">
+            <img  class="default_img" ng-src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=150&photoreference={{businessAllGogldetails[0].photos[0].photo_reference}}&key={{apikey}}">
+           
+            <div class="bmd-result-details ttop">
+             
+
+          
+               <p class="md_name">{{businessAllGogldetails[0].name}}</p>
+               <div> 
+                <raty id="star" score="{{businessAllGogldetails[0].rating}}" number="5"></raty>
+               </div>
+               <p>{{businessAllGogldetails[0].formatted_address}}<br>
+                  {{businessAllGogldetails[0].formatted_phone_number}}<br>
+                 
+                  <img src="img/loccation.png" width="15px" height="15px"> <span class="md_loc">{{businessAllGogldetails[0].address_components[0].long_name}}</span>
+               </p>
+            </div>
+            <div class="bmd-result-dstnce top">
+              <!--  <div class="km">1.2 KM </div> -->
+            </div>
+         </div>
+  
+           <div class="bmd-result1 wht" ng-show="fromtype=='catValue'">
+            <img class="default_img"  ng-src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=150&photoreference={{businessAllGogldetails[0].photos[0].photo_reference}}&key={{apikey}}">
+            
+            <div class="bmd-result-details ttop">
+             
+
+          
+               <p class="md_name">{{businessAllGogldetails[0].name}}</p>
+               <div> 
+                <raty id="star" score="{{businessAllGogldetails[0].rating}}" number="5"></raty>
+               </div>
+               <p>{{businessAllGogldetails[0].formatted_address}}<br>
+                  {{businessAllGogldetails[0].formatted_phone_number}}<br>
+                 
+                  <img src="img/loccation.png" width="15px" height="15px"> <span class="md_loc">{{businessAllGogldetails[0].address_components[0].long_name}}</span>
+               </p>
+            </div>
+            <div class="bmd-result-dstnce top">
+              <!--  <div class="km">1.2 KM </div> -->
+            </div>
+         </div>
+
+
+           <div class="bmd-result1 wht" ng-show="from_type=='other'">
+            <img ng-src="{{businessAlldetails.image}}">
+            <div class="bmd-result-details ttop">
+              <img ng-show="favid=='noFav'" src="img/add.png" ng-click="favourite(businessAlldetails.id,businessAlldetails.cid)">
+               <img ng-hide="favid=='noFav'" src="img/ypstrip.png" ng-click="favourite(businessAlldetails.id,businessAlldetails.cid)">
+               
+               <p class="md_name">{{businessAlldetails.name}}</p>
+               <div> 
+                <raty id="star" score="{{businessAlldetails.rating}}" number="5"></raty>
+               </div>
+               <p>{{businessAlldetails.street_address}}<br>
+                  {{businessAlldetails.phone_number}}<br>
+                 
+                  <img src="img/loccation.png" width="15px" height="15px"> <span class="md_loc">{{businessAlldetails.city}}</span>
+               </p>
+            </div>
+            <div class="bmd-result-dstnce top">
+              <!--  <div class="km">1.2 KM </div> -->
+            </div>
+         </div>
+      </div>
+
+      <div class="tab_list_outer">
+         <div class="tab_list">
+            <div class="tabs tabs-top tabs-virtual top bot" >
+               <a href class="tab-item disable-user-behavior dark"
+                  ng-class="{active: active_content=='orders'}" ng-click="setActiveContent('orders')">
+               BUSINESS DETAILS
+               </a>
+               <a href class="tab-item disable-user-behavior dark"
+                  ng-class="{active: active_content=='deliveries'}" ng-click="setActiveContent('deliveries')" >
+               GALLERY
+               </a>
+               <a href class="tab-item disable-user-behavior dark"
+                  ng-class="{active: active_content=='deliveri'}" ng-click="setActiveContent('deliveri')">
+               REVIEWS
+               </a>
+            </div>
+            <div class="full_scroll boot" ng-show="active_content=='orders'">
+               <div class="all_lisst">
+                  <div class="head_details">
+                     <p>{{businessAlldetails.description}}
+                     </p>
+                  </div>
+                  <div class="md_description">
+                     <div class="md_descriptioninner">
+                        <div class="md_description1">
+                           Social Links
+                        </div>
+                        <div class="md_description2">
+                           :
+                        </div>
+                        <div class="md_description3">
+                           {{businessAlldetails.social_links}}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="md_description">
+                     <div class="md_descriptioninner">
+                        <div class="md_description1">
+                           Hours
+                        </div>
+                        <div class="md_description2">
+                           :
+                        </div>
+                        <div class="md_description3">
+                           {{businessAlldetails.hours}}
+                           <br>
+                           <br>
+                           Mon-Thu{{businessAlldetails.open_time}}-{{businessAlldetails.close_time}}<br>
+                           
+                        </div>
+                     </div>
+                  </div>
+                  <div class="md_description">
+                     <div class="md_descriptioninner">
+                        <div class="md_description1">
+                           Message
+                        </div>
+                        <div class="md_description2">
+                           :
+                        </div>
+                        <div class="md_description3">
+                          {{businessAlldetails.message}}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="md_description">
+                     <div class="md_descriptioninner">
+                        <div class="md_description1">
+                           General Info
+                        </div>
+                        <div class="md_description2">
+                           :
+                        </div>
+                        <div class="md_description3">
+                           {{businessAlldetails.general_info}}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+               <div class="full_scroll boot" ng-show="active_content=='orders'&& from_type==='api_name' || from_type==='singleValue'">
+               <div class="all_lisst">
+                  <div class="head_details">
+                     <p>
+                     </p>
+                  </div>
+                  <div class="md_description">
+                     <div class="md_descriptioninner">
+                        <div class="md_description1">
+                           URL
+                        </div>
+                        <div class="md_description2">
+                           :
+                        </div>
+                        <div class="md_description3">
+                           {{businessAllGogldetails[0].url}}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="md_description">
+                     <div class="md_descriptioninner">
+                        <div class="md_description1">
+                           Address
+                        </div>
+                        <div class="md_description2">
+                           :
+                        </div>
+                        <div class="md_description3">
+                          {{businessAllGogldetails[0].formatted_address}}
+                           <br>
+                           <br>
+                          
+                           
+                        </div>
+                     </div>
+                  </div>
+                
+               </div>
+            </div>
+
+
+             <div class="full_scroll boot" ng-show="active_content=='orders'&& from_type==='google'">
+               <div class="all_lisst">
+                  <div class="head_details">
+                     <p>
+                     </p>
+                  </div>
+                  <div class="md_description">
+                     <div class="md_descriptioninner">
+                        <div class="md_description1">
+                           URL
+                        </div>
+                        <div class="md_description2">
+                           :
+                        </div>
+                        <div class="md_description3">
+                           {{businessAllGogldetails[0].url}}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="md_description">
+                     <div class="md_descriptioninner">
+                        <div class="md_description1">
+                           Address
+                        </div>
+                        <div class="md_description2">
+                           :
+                        </div>
+                        <div class="md_description3">
+                          {{businessAllGogldetails[0].formatted_address}}
+                           <br>
+                           <br>
+                          
+                           
+                        </div>
+                     </div>
+                  </div>
+                
+               </div>
+            </div>  
+
+              <div class="full_scroll boot" ng-show="active_content=='orders'&& fromtype==='catValue'">
+               <div class="all_lisst">
+                  <div class="head_details">
+                     <p>
+                     </p>
+                  </div>
+                  <div class="md_description">
+                     <div class="md_descriptioninner">
+                        <div class="md_description1">
+                           URL
+                        </div>
+                        <div class="md_description2">
+                           :
+                        </div>
+                        <div class="md_description3">
+                           {{businessAllGogldetails[0].url}}
+                        </div>
+                     </div>
+                  </div>
+                  <div class="md_description">
+                     <div class="md_descriptioninner">
+                        <div class="md_description1">
+                           Address
+                        </div>
+                        <div class="md_description2">
+                           :
+                        </div>
+                        <div class="md_description3">
+                          {{businessAllGogldetails[0].formatted_address}}
+                           <br>
+                           <br>
+                          
+                           
+                        </div>
+                     </div>
+                  </div>
+                
+               </div>
+            </div>   
+
+            <div class="full_scroll boot" has-header="true" ng-show="active_content=='deliveries'">
+               <div class="md_gall">
+                  <div id="left-col" ng-repeat="galry in gallary">
+                     <img src="{{galry.image}}">
+                  </div>
+               
+               </div>
+               <br>  
+            </div>
+             <div class="full_scroll boot" has-header="true" ng-show="active_content==='deliveries' && noGal==='noGallery'">
+               <div class="md_gall">
+                  <div id="left-col" >
+                    <p class="result_none">No Results</p>
+                  </div>
+               
+               </div>
+               <br>  
+            </div>
+            <div class="full_scroll boot" has-header="true" ng-show="active_content=='deliveri'">
+
+               <li class="over_all" ng-repeat="review in reviews">
+                  <div class="reviewss">
+                     <div class="reviewss1">
+                        <img src="{{review.image}}">
+                     </div>
+                     <div class="reviewss2">
+                        {{review.username}}<br>
+                         <raty id="star{{$index}}" score="{{review.rating}}" number="5"></raty>
+                     </div>
+                     <div class="reviewss3">
+                        {{review.created_date}}
+                     </div>
+                  </div>
+                  <div class="rev_full">
+                     <div class="rev_full1">
+                        {{review.comments}} <span class="md_amore">...more</span>
+                       <!--  <div class="md_like">Like this review?   <span class="yes_md">  yes</span>
+                        </div>
+                        <img src="img/yp-shre.png"> 
+                        <p class="share">share review</p> -->
+                     </div>
+                  </div>
+               </li>
+
+               <li class="over_all" ng-repeat="gglReview in goglReview[0]" ng-show="from_type==='api_name' || from_type==='singleValue'">
+               
+                  <div class="reviewss">
+                     <div class="reviewss1">
+                       <!--  <img src="{{gglReview.profile_photo_url}}"> -->
+                       <img src="img/usericon.png"> 
+                     </div>
+                     <div class="reviewss2">
+                        {{gglReview.author_name}}<br>
+                         <raty id="star{{$index}}" score="{{gglReview.rating}}" number="5"></raty>
+                     </div>
+                     <div class="reviewss3">
+                        {{gglReview.created_date}}
+                     </div>
+                  </div>
+                  <div class="rev_full">
+                     <div class="rev_full1">
+                        {{gglReview.text}} <span class="md_amore">...more</span>
+                        <!-- <div class="md_like">Like this review?   <span class="yes_md">  yes</span>
+                        </div>
+                        <img src="img/yp-shre.png"> 
+                        <p class="share">share review</p> -->
+                     </div>
+                  </div>
+               </li>
+               <li class="over_all" ng-show="goRev=='noGoglRev'">
+                  <div class="reviewss">
+                    
+                       <p class="result_none">No results</p>
+                    
+                    
+                  </div>
+               </li>
+
+                <li class="over_all" ng-repeat="gglReview in goglReview[0]" ng-show="from_type=='google'">
+               
+                  <div class="reviewss">
+                     <div class="reviewss1">
+                        <!-- <img src="{{gglReview.profile_photo_url}}"> -->
+                         <img src="img/usericon.png">
+                     </div>
+                     <div class="reviewss2">
+                        {{gglReview.author_name}}<br>
+                         <raty id="star{{$index}}" score="{{gglReview.rating}}" number="5"></raty>
+                     </div>
+                     <div class="reviewss3">
+                        {{gglReview.created_date}}
+                     </div>
+                  </div>
+                  <div class="rev_full">
+                     <div class="rev_full1">
+                        {{gglReview.text}} <span class="md_amore">...more</span>
+                       <!--  <div class="md_like">Like this review?   <span class="yes_md">  yes</span>
+                        </div>
+                        <img src="img/yp-shre.png"> 
+                        <p class="share">share review</p> -->
+                     </div>
+                  </div>
+               </li>
+               <li class="over_all" ng-repeat="gglReview in goglReview[0]" ng-show="fromtype==='catValue'">
+               
+                  <div class="reviewss">
+                     <div class="reviewss1">
+                        <!-- <img src="{{gglReview.profile_photo_url}}"> -->
+                         <img src="img/usericon.png">
+                     </div>
+                     <div class="reviewss2">
+                        {{gglReview.author_name}}<br>
+                         <raty id="star{{$index}}" score="{{gglReview.rating}}" number="5"></raty>
+                     </div>
+                     <div class="reviewss3">
+                        {{gglReview.created_date}}
+                     </div>
+                  </div>
+                  <div class="rev_full">
+                     <div class="rev_full1">
+                        {{gglReview.text}} <span class="md_amore">...more</span>
+                       <!--  <div class="md_like">Like this review?   <span class="yes_md">  yes</span>
+                        </div>
+                        <img src="img/yp-shre.png"> 
+                        <p class="share">share review</p> -->
+                     </div>
+                  </div>
+               </li>
+
+               
+            </div>
+         </div>
+      </div>
+   </ion-content>
+</ion-view>
+

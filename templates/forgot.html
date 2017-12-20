@@ -1,0 +1,27 @@
+<ion-content class="theme-bg">
+   <div class="bmd-title-logo">
+      <img src="img/mdlogo.png">
+   </div>
+   <form ng-submit="fgtForm.$valid &&forgetPassword()" name="fgtForm">
+   <div class="bmd-usr-wrapper bot">
+      <div class="bmd-usrs">Forgot  Password</div>
+      <div class="bmd-usr">
+         <div class="bmd-usr1"><img src="img/letter.png"></div>
+         <div class="bmd-usr2">
+            <input class="bmd-usr-input" type="email" placeholder="Enter Email-Id"  name="email" ng-model="fgt.email" required>
+         </div>
+       
+      </div>
+	   
+	     <div class="error" ng-show="submitted  && fgtForm.email.$error.required">Email-Id is required.</div>
+           <div class="error" ng-show="fgtForm.email.$touched && fgtForm.email.$invalid">Invalid Email-ID.</div>
+      <br>
+      <button class="bmd-main-btn" type="submit"  ng-click="submitted=true">Submit</button>
+      <div ng-show="showMessage" class="{{class}}">
+            {{ message }}
+        </div>
+   </div>
+</form>
+   <div class="account_md left"><a href="#/app/signin">Back to Login</a></div>
+</ion-content>
+

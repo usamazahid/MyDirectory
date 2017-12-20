@@ -1,0 +1,72 @@
+<ion-view view-title="">
+   <ion-pane id="bmd-bg-sec5">
+      <ion-header-bar class="bar-stableb colorbg">
+      </ion-header-bar>
+      <ion-content class="wht_bg">
+         <div class="full-bg">
+            <div class="bmd-search-bar-outer">
+               <button class="button button-positive button-clear button_text icon ion-ios-search txt-color-gray"></button>
+               <input type="text" class="bmd-input" placeholder="What service do you need today?">
+               <button class="button button-positive button-clear button_text icon ion-ios-close txt-color-black"></button>
+            </div>
+         </div>
+		   <div class="wht_bgclr">
+ <div class="gray_bg">
+	
+            
+        
+		  
+		  <div class="row">
+			 
+			   <div class="col"><div class="ful_wht left" ng-repeat="view in clctnViews">
+	 <p>{{view.business_name}}</p>
+	  <raty id="star{{$index}}" score="{{view.rating}}" number="5"></raty>
+	  <p class="bowl_des">{{view.business_category_name}}</p>
+	  <ul class="addr_dtl">
+		   
+		  <li>{{view.street_address}}</li>
+		
+		  <li>{{view.phone_number}}</li>
+	  </ul>
+	<!--   
+	 <div class="but_icons">
+	   <div class="but_icons1">
+	  
+		Directions
+	  
+	  </div>
+		  <div class="but_icons2">
+	Notes
+	  
+	  </div>
+		  <div class="but_icons3">
+	  
+	More
+	  
+	  </div>
+	  
+	  
+	  </div> -->
+
+	  
+	  
+	  </div></div>
+  
+
+</div>
+		
+ 
+	 
+	 </div>
+			   
+		
+			   
+			   
+		
+		  </div>
+      </ion-content>
+      <ion-content class="full_scrolling" has-header="true" padding="true" ng-show="active_content=='people'">
+      </ion-content>
+   </ion-pane>
+</ion-view>
+

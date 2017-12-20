@@ -1,0 +1,81 @@
+<ion-side-menus enable-menu-with-back-views="false">
+   <ion-side-menu-content>
+      <ion-nav-bar class="bar-stable">
+         <ion-nav-back-button>
+         </ion-nav-back-button>
+         <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon whtclr" menu-toggle="left">
+            </button>
+         </ion-nav-buttons>
+      </ion-nav-bar>
+      <ion-nav-view name="menuContent"></ion-nav-view>
+   </ion-side-menu-content>
+   <ion-side-menu side="left" class="full">
+      <ion-header-bar class="bar-stable width">
+         <div class="llog" >
+          <img src="img/md-ap-logo.png" ng-show="menuDiv">
+			 
+			 
+         </div>
+         <div class="sign_md" ng-show="menuDiv">
+            <div class="sign_md1">
+				 <a menu-close href="#/app/signin">
+               <img src="img/app_signin.png"><br>
+              	Sign In</a>
+            </div>
+            <div class="sign_md2">
+				<a menu-close href="#/app/signup">
+               <img src="img/app_signin.png"><br>
+               	Sign Up</a>
+            </div>
+            <div class="shadow"></div>
+         </div>
+
+        <div class="llog signShadow" ng-show="menuDivShow">
+         
+            <img ng-show="Nouserimage!='nouserimage'" src="{{userimage}}" class="login_pic">
+              <img ng-show="Nouserimage=='nouserimage'" src="img/uuser.png" class="login_pic">
+			
+          <p class="nam_log">{{username}}</p>
+
+         </div>
+      
+
+      </ion-header-bar>
+      <ion-content>
+         <ion-list>
+            <div class="full_list">
+               <div class="full_list1">
+                  <ion-item menu-close href="#/app/playlists" >
+                     <img src="img/house_md.png"><br>
+                     Home
+               </div>
+               </ion-item>
+               <div class="full_list2">
+                  <ion-item menu-close href="#/app/singlesearch">
+                     <img src=img/search_md.png><br>
+                     Search
+               </div>
+               </ion-item>
+               
+               </ion-item>
+               <div class="full_list4">
+                  <ion-item menu-close href="#/app/collection">
+                     <img src=img/mycoll.png><br>
+                     My Collections
+               </div>
+               </ion-item>
+               
+               </ion-item>
+               <div class="full_list6" ng-show="logut" ng-click="logout()">
+                  <ion-item menu-close>
+                     <img src=img/logout.png><br>
+                     Logout
+               </div>
+               </ion-item>
+            </div>
+         </ion-list>
+      </ion-content>
+   </ion-side-menu>
+</ion-side-menus>
+

@@ -1,0 +1,42 @@
+ <ion-modal-view>
+<ion-content class="theme-bg">
+   <div class="bmd-title-logo">
+      <img src="img/mdlogo.png">
+   </div>
+  <form ng-submit="loginForm.$valid &&doLogin()" name="loginForm">
+   <div class="bmd-usr-wrapper">
+      <div class="bmd-usrs">Sign In</div>
+      <div class="bmd-usr">
+         <div class="bmd-usr1"><img src="img/letter.png"></div>
+         <div class="bmd-usr2">
+            <input class="bmd-usr-input"  type="email" placeholder='Email-Id' name="email" ng-model="loginData.email" required>
+         </div>    
+         
+      </div>
+	   
+	      <div class="error" ng-show="submitted  && loginForm.email.$error.required">Email-Id is required.</div>
+          
+           <div class="error" ng-show="loginForm.email.$touched && loginForm.email.$invalid">Invalid Email-ID.</div>
+         
+      <div class="bmd-usr">
+         <div class="bmd-usr1"><img src="img/bmd-pass.png"></div>
+         <div class="bmd-usr2">
+            <input class="bmd-usr-input" type="password" placeholder='Password' name="password" ng-model="loginData.password" required>
+          </div>   
+           
+        
+      </div>
+	   
+	    <div class="error" ng-show="submitted  && loginForm.password.$error.required">Password is required.</div>
+      <button class="bmd-main-btn top" type="submit" ng-click="submitted=true">Sign In</button>
+       <div ng-show="showMessage" class="{{class}}">
+            {{ message }}
+        </div>
+   </div>
+  </form> 
+   <div class="account_md left"><a href="#/app/forgot">Forgot your Password</a></div>
+   <div class="md_or">Or</div>
+   <div class="account_md">Don't have an account ? <span class="signin_md"><a href="#/app/signup">Sign Up</a></span></div>
+</ion-content>
+
+ </ion-modal-view>

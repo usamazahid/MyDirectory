@@ -1,0 +1,79 @@
+<ion-content class="theme-bg">
+   <div class="bmd-title-logo">
+      <img src="img/mdlogo.png">
+   </div>
+   <form  ng-submit="myForm.$valid && doReg()" name="myForm" >
+   <div class="bmd-usr-wrapper">
+      <div class="bmd-usrs">Sign Up</div>
+      <div class="bmd-usr">
+         <div class="bmd-usr1"><img src="img/bmd-usr.png"></div>
+         <div class="bmd-usr2">
+            <input class="bmd-usr-input" type="text" placeholder='Username' name="username" ng-minlength="4" ng-model="regData.username" required>
+         </div>   
+            
+         
+      </div>
+	   
+	    <div class="error" ng-show="submitted  && myForm.username.$error.required">Username is required.</div>
+           
+           <div class="error" ng-show="myForm.username.$touched && myForm.username.$error.minlength">Username should be minimum 4 characters.</div>
+      <div class="bmd-usr">
+         <div class="bmd-usr1"><img src="img/letter.png"></div>
+         <div class="bmd-usr2">
+            <input class="bmd-usr-input" type="email" placeholder='Email-Id' name="email" ng-model="regData.email" required>
+         </div>   
+          
+      </div>
+	   
+	     <div class="error" ng-show="submitted  && myForm.email.$error.required">Email-Id is required.</div>
+          
+           <div class="error" ng-show="myForm.email.$touched && myForm.email.$invalid">Invalid Email-ID.</div>
+         
+     <div class="bmd-usr">
+         <div class="bmd-usr1"><img src="img/bmd-pass.png"></div>
+         <div class="bmd-usr2">
+            <input class="bmd-usr-input" type="password" placeholder='Password' id="password" name="password" ng-minlength="6" ng-model="regData.password" required>
+         </div>   
+          </div>
+	   
+	    <div class="error" ng-show="submitted  && myForm.password.$error.required">Password is required.</div>
+          
+          <div class="error" ng-show="myForm.password.$touched && myForm.password.$error.minlength">Password should have minimum 6 characters.</div>
+	   
+       <div class="bmd-usr">
+         <div class="bmd-usr1"><img src="img/bmd-pass.png"></div>
+         <div class="bmd-usr2">
+            <input class="bmd-usr-input" type="password" placeholder='Confirm Password' id="password_c" name="password_c" ng-model="regData.password_c"  required  />
+         </div>
+     
+       <br />
+         
+      </div>
+       <div ng-show="myForm.password_c.$error.required && myForm.password_c.$dirty">Please confirm your password.</div>
+           <div ng-show="myForm.password_c.$error.required != myForm.password.$error.required ">Passwords do not match.</div>
+     
+       
+      <div class="bmd-usr">
+         <div class="bmd-usr1"><img src="img/bmd-pass.png"></div>
+         <div class="bmd-usr2">
+            <input class="bmd-usr-input" type="text" name="phone_number" placeholder="Phone Number" numbers-only ng-model="regData.phone_number" ng-minlength="5" required/>
+          </div>   
+           
+            
+        
+      </div>
+     
+	    <div class="error" ng-show="submitted && myForm.phone_number.$error.required">Phone number is required.</div>
+            <div class="error" ng-show="myForm.phone_number.$touched && myForm.phone_number.$error.minlength">Phone number should have minimum 5 characters.</div>
+            <div class="error" ng-show="myForm.phone_number.$touched && myForm.phone_number.$error.minlength">Phone number could not exceedd more than  5 characters.</div>
+      <input id="checkbox-1" class="checkbox-custom" name="checkbox" ng-model="checkbox" type="checkbox" required>
+      <label for="checkbox-1" class="checkbox-custom-label">I agree the terms of service</label>
+      <div class="error" ng-show="submitted&& myForm.checkbox.$error.required">This field is required.</div>
+      <br>
+      <br>
+      <button class="bmd-main-btn" type="submit" ng-click="submitted=true">Sign Up</button>
+      <div class="account_md">Already have an account ? <span class="signin_md"><a href="#/app/signin">Sign In</a></span></div>
+   </div>
+</form>
+</ion-content>
+

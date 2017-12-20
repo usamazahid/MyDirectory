@@ -1,0 +1,130 @@
+<ion-view view-title="">
+   <ion-pane id="bmd-bg-sec5">
+      <ion-header-bar class="bar-stableb colorbg">
+      </ion-header-bar>
+      <ion-content class="wht_bg">
+         <div class="full-bg">
+            <div class="bmd-search-bar-outer">
+               <button class="button button-positive button-clear button_text icon ion-ios-search txt-color-gray"></button>
+               <input type="text" class="bmd-input" placeholder="What service do you need today?" ng-change="search()" ng-model="data.search">
+               <button class="button button-positive button-clear button_text icon ion-ios-close txt-color-black"></button>
+            </div>
+         </div>
+         <div class="menu_simple" ng-show="showList">
+           <ul>
+             <li ng-repeat="businesses in business | filter:data.search" ng-click='data.search=businesses.name;hideList(businesses)'><a href="#">{{businesses.name}}</a></li>
+      
+           </ul>
+            <ul  ng-if="business.name!=data.search">
+         <li ><a href="#">No results</a></li>
+        
+      </ul>
+         </div>
+      </ion-content>
+	   
+	   <!--tab-list-->
+      <div class="tabs tabs-top tabs-virtual tops" >
+         <a href class="tab-item disable-user-behavior"
+            ng-class="{active: active_content=='orders'}" ng-click="setActiveContent('orders')">
+         ALL
+         </a>
+         <a href class="tab-item disable-user-behavior"
+            ng-repeat="catg in catgri" ng-class="{active: active_content=='{{catg.id}}'}" ng-click="setActiveContent({{catg.id}})">
+         {{catg.business_category_name}}
+         </a>
+        <!--  <a href class="tab-item disable-user-behavior"
+            ng-class="{active: active_content=='resturants'}" ng-click="setActiveContent('resturants')">
+         RESTURANTS
+         </a>
+         <a href class="tab-item disable-user-behavior"
+            ng-class="{active: active_content=='hospital'}" ng-click="setActiveContent('hospital')">
+         HOSPITAL
+         </a>
+         <a href class="tab-item disable-user-behavior"
+            ng-class="{active: active_content=='people'}" ng-click="setActiveContent('people')">
+         FIND PEOPLE
+         </a> -->
+      </div>
+	   <!--tab-list end-->
+      <ion-content class="full_scrolling"   ng-show="active_content=='orders'">
+         <div class="all_inf hght">
+            <div class="coupons_list">
+               <a href="">
+                  <b>New York Locksmith And Door </b><br>
+                  <p class="light_md">15% off for any locksmith service 24 Hours</p>
+                  <p class="light_md1">1KM</p>
+               </a>
+            </div>
+          
+         </div>
+      </ion-content>
+      <ion-content class="full_scrolling" has-header="true" ng-repeat="cbusines in catBusi" ng-show="active_content=='{{cbusines.id}}'">
+    
+      <div class="all_inf hght">
+            <div class="coupons_list">
+               <a href="">
+                  <b>{{cbusines.business_name}}</b><br>
+                  <p class="light_md">{{cbusines.street_address}}</p>
+                  <p class="light_md1">1KM</p>
+               </a>
+            </div>
+          
+         </div>
+      </ion-content>
+      <!-- <ion-content class="full_scrolling" has-header="true"  ng-show="active_content=='resturants'">
+      </ion-content>
+      <ion-content class="full_scrolling" has-header="true" ng-show="active_content=='hospital'">
+         <div class="md_gall">
+            <ul>
+               <li>
+                  <img src="img/building.png">
+                  <div class="element"> king soude Medical City <br>
+                     Riyad
+                  </div>
+               </li>
+               <li>
+                  <img src="img/building.png" style="background-size:cover;">
+                  <div class="element"> king soude Medical City <br>
+                     Riyad
+                  </div>
+               </li>
+               <li>
+                  <img src="img/building.png">
+                  <div class="element"> king soude Medical City <br>
+                     Riyad
+                  </div>
+               </li>
+               <li>
+                  <img src="img/building.png">
+                  <div class="element"> king soude Medical City <br>
+                     Riyad
+                  </div>
+               </li>
+               <li>
+                  <img src="img/building.png">
+                  <div class="element"> king soude Medical City <br>
+                     Riyad
+                  </div>
+               </li>
+               <li>
+                  <img src="img/building.png">
+                  <div class="element"> king soude Medical City <br>
+                     Riyad
+                  </div>
+               </li>
+               <li>
+                  <img src="img/building.png">
+                  <div class="element"> king soude Medical City <br>
+                     Riyad
+                  </div>
+               </li>
+            </ul>
+         </div>
+         </div> 
+         <div class="browsw_gall"> All Details</div>
+      </ion-content>
+      <ion-content class="full_scrolling" has-header="true" padding="true" ng-show="active_content=='people'">
+      </ion-content> -->
+   </ion-pane>
+</ion-view>
+

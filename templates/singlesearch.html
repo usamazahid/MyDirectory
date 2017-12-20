@@ -1,0 +1,31 @@
+<ion-view>
+   <ion-header-bar class="bar-stableb colorbg">
+   </ion-header-bar>
+   <ion-content class="theme-bg">
+     
+	
+    <div class="bmd-search-bar-outer" style="margin-top:10px;">
+            <button class="button button-positive button-clear button_text icon ion-ios-location-outline txt-color-gray"></button>
+            <input type="text" class="bmd-input" ng-change='disableTap();initializeSingle()' data-tap-disabled="true" placeholder="Search City" ng-model="city" id="countrys">
+            <!-- <button class="button button-positive button-clear button_text icon ion-ios-close txt-color-black"></button> -->
+         </div>
+   <div class="bmd-search-bar-outer down" style="margin-top:20px;">
+     
+       <button class="button button-positive button-clear button_text icon ion-ios-search txt-color-gray"></button>
+      <input type="text" class="bmd-input"  placeholder="What service do you need today?" ng-change="search()" ng-model="data.search">
+     <!--  <button class="button button-positive button-clear button_text icon ion-ios-close txt-color-black"></button> -->
+   </div>
+    <div class="menu_simple" ng-show="showList">
+      <ul>
+         <li ng-repeat="businesses in business | filter:data.search" ng-click='data.search=businesses.name;hideList(businesses)'><a href="#">{{businesses.name}}</a></li>
+        
+      </ul>
+       <ul  ng-if="business.name!=data.search">
+         <li ><a href="#">No results</a></li>
+        
+      </ul>
+   </div>
+   </ion-content>
+</ion-view>
+
+

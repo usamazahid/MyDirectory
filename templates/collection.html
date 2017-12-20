@@ -1,0 +1,61 @@
+<ion-view>
+   <ion-pane>
+      <ion-header-bar class="bar-stableb colorbg">
+      </ion-header-bar>
+      <ion-content>
+         <div class="full-bg top bot">
+            <div class="bmd-search-bar-outer">
+               <button class="button button-positive button-clear button_text icon ion-ios-search txt-color-gray"></button>
+               <input type="text" class="bmd-input" placeholder="What service do you need today?" ng-change="search()" ng-model="data.search">
+               <button class="button button-positive button-clear button_text icon ion-ios-close txt-color-black"></button>
+            </div>
+             <div class="menu_simple" ng-show="showList">
+           <ul>
+             <li ng-repeat="businesses in business | filter:data.search" ng-click='data.search=businesses.name;hideList(businesses)'><a href="#">{{businesses.name}}</a></li>
+      
+           </ul>
+            <ul  ng-if="business.name!=data.search">
+         <li ><a href="#">No results</a></li>
+        
+      </ul>
+         </div>
+         </div>
+		    
+         <div class="business-dtl left">
+			  <!--collection-gallery-->
+            <div class="business-dtl_inner martop">
+               <div class="coll_2 full">Collections </div>
+               <ul class="rig columns-3">
+
+                  <li ng-repeat="clctn in collection" ng-click="clctnView(clctn.id)">
+                  
+                     <img src="{{clctn.image}}"/>
+                     <h3>{{clctn.business_category_name}}</h3>
+                  </li>
+                 
+               </ul>
+            </div>
+			  <!--collection gallery-->
+            <div class="col">
+               <div class="coll_2 lef"> Featured Collections </div>
+              <!--  <div class="coll_2 lef rht"><a href="#/app/browse">See All</a></div> -->
+            </div>
+            <div class="business-dtl_inner">
+               <ion-scroll direction="x" style="width: 40%;">
+                  <div class="md_apscroll">
+                     <ul class="family-icon-scroller">
+                        <li class="family-icon" ng-repeat="slider in clctnSlider">
+                           <img src="{{slider.image}}" />
+                           <div class="text_mdapp"><a href="#/app/follow">{{slider.business_category_name}}</a></div>
+                          <!--  <div class="text_mdappp">7 business in this collection</div> -->
+                        </li>
+                       
+                     </ul>
+                  </div>
+               </ion-scroll>
+            </div>
+         </div>
+      </ion-content>
+   </ion-pane>
+</ion-view>
+
